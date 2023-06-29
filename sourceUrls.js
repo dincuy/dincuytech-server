@@ -104,4 +104,11 @@ const pulsaUrls = [
   },
 ];
 
-module.exports = { paketInternetUrls, voucherInternetUrls, pulsaUrls };
+
+const sourceUrls = {
+  pulsa: pulsaUrls,
+  "paket-internet": paketInternetUrls,
+  "voucher-internet": voucherInternetUrls
+}
+
+module.exports = sourceUrls;

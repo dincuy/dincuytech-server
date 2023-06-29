@@ -2,57 +2,59 @@ const cheerio = require("cheerio");
 
 /**
  *
- * @param {Array} source
+ * @param {Object} source
+ * @param {String} product
  */
-const scrapFromUrl = async (sources) => {
+const scrapFromUrl = async (sourceUrls, product) => {
+  const sources = sourceUrls[product]
+  
   const providers = sources.map((item) => item.provider);
   const data = [];
 
   for (let i in providers) {
     const provider = providers[i];
     const [source] = sources.filter((item) => item.provider === provider);
-    const {urls} = source
+    const { urls } = source;
+
     for (let i in urls) {
       const newData = []
-      console.log(urls[i])
-
       try {
         const res = await fetch(urls[i]);
-        const html = await res.text()
+        const html = await res.text();
         const $ = cheerio.load(html);
 
-        const title = $('.payment_title').text()
+        const title = $(".payment_title").text();
 
-        $('table.hidden-xs tbody tr').each((index, element) => {
-          const kode = $(element).find('td:nth-child(1)').text().trim()
-          const kuota = $(element).find('td:nth-child(2)').text().trim()
-          const desc = $(element).find('td:nth-child(2) b').attr('data-title').trim()
-          const harga = $(element).find('td:nth-child(3)').text().trim()
-          const order = $(element).find('td:nth-child(4)').text().trim()
-          
+        $("table.hidden-xs tbody tr").each((index, element) => {
+          const kode = $(element).find("td:nth-child(1)").text().trim();
+          const produk = $(element).find("td:nth-child(2)").text().trim();
+          const desc = $(element)
+            .find("td:nth-child(2) b")
+            .attr("data-title")
+            .replace(/\n/g, " ")
+            .trim() || "tidak ada";
+          const harga = $(element).find("td:nth-child(3)").text().trim();
+          const order = $(element).find("td:nth-child(4)").text().trim();
+
           newData.push({
             kode,
             provider,
-            jenisPaket: title,
-            kuota,
+            jenisPaket: title.split(" ").slice(1).join(" "),
+            produk,
             desc,
             harga,
-            order
-          })
-          // console.log()
-        })
-
+            order,
+          });
+        });
       } catch (error) {
-        console.log(error.message)
-        return
+        throw error
       }
 
-      data.push(...newData)
+      data.push(...newData);
     }
   }
 
-  console.log(data)
-  return data
+  return data;
 };
 
-module.exports = scrapFromUrl
+module.exports = scrapFromUrl;
