@@ -1,5 +1,5 @@
 const allowedOrigins = [
-  "https://hbij2t.csb.app"
+  "https://dincuytech.netlify.app"
 ]
 
 module.exports = allowedOrigins
