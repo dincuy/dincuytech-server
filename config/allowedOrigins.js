@@ -1,5 +1,5 @@
 const allowedOrigins = [
-  "http://localhost:3500"
+  "https://hbij2t.csb.app"
 ]
 
 module.exports = allowedOrigins
