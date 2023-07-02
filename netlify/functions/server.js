@@ -40,7 +40,7 @@ app.get("/update", (req, res) => {
       }
     });
   }
-  // res.json({ text: "update sukses" });
+  res.json({ text: "update sukses" });
 });
 
 app.use("/checkout", require("../../routes/checkout"));
