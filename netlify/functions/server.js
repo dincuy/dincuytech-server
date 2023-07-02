@@ -17,7 +17,7 @@ app.set("view engine", "ejs");
 
 // timer dalam milidetik
 // 24 jam
-const timer = updateDataProduct(3600000);
+const timer = updateDataProduct(120000);
 
 app.get("/", (req, res) => {
   res.render("index", { timer: timer });
