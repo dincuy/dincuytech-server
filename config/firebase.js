@@ -6,7 +6,7 @@ const { getFirestore } = require("firebase/firestore");
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBoz7Y2uc30cWNuvZiG2DPyEgT8NZG768k",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "dincuytech.firebaseapp.com",
   projectId: "dincuytech",
   storageBucket: "dincuytech.appspot.com",
