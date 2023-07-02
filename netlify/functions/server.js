@@ -2,7 +2,7 @@
 // const express = require("express");
 // const path = require('path')
 // const app = express();
-// const serverless = require("serverless-http");
+const serverless = require("serverless-http");
 // const cors = require("cors");
 // const corsOptions = require("../../config/corsOptions");
 // const { updateDataProduct } = require("../../controllers/productController");
