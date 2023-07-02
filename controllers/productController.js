@@ -1,11 +1,11 @@
-const { setDoc, doc } = require("firebase/firestore");
+const { setDoc, doc, serverTimestamp } = require("firebase/firestore");
 const { db } = require("../config/firebase");
 const scrapFromUrl = require("../utils/scrapFromUrl");
 const sourceUrls = require("../sourceUrls");
 
 /**
- * 
- * @param {Number} timer - milidetik 
+ *
+ * @param {Number} timer - milidetik
  * @returns {new Date.getTime() + timer}
  */
 const updateDataProduct = (timer) => {
@@ -25,6 +25,7 @@ const updateDataProduct = (timer) => {
           // const newData = data.slice(1, 10)
           await setDoc(doc(db, "products", products[i]), {
             data,
+            updatePada: serverTimestamp(),
           });
         });
       }
