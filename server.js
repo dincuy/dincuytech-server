@@ -1,15 +1,14 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const serverless = require("serverless-http");
 const cors = require("cors");
-const corsOptions = require("../../config/corsOptions");
-const { updateDataProduct } = require("../../controllers/productController");
+const corsOptions = require("./config/corsOptions");
+const { updateDataProduct } = require("./controllers/productController");
 
-
-// const PORT = process.env.PORT || 3500
+const PORT = 3500
 
 app.use(cors(corsOptions));
+// app.use(express.static(path.join(__dirname, 'public')))
 
 app.set("view engine", "ejs")
 
@@ -23,17 +22,13 @@ app.get("/", (req, res) => {
   res.render('index', {timer: timer})
 });
 
-app.use("/checkout", require("../../routes/checkout"));
+app.use("/checkout", require("./routes/checkout"));
 
 app.all("*", (req, res) => {
   res.status(404);
   res.json({ message: "Url not found cuyy" });
 });
 
-// app.listen(PORT, () => {
-//   console.log(`Sukses server berjalan di http://localhost:${PORT}`)
-// })
-
-const handler = serverless(app);
-
-module.exports = { handler };
+app.listen(PORT, () => {
+  console.log(`Sukses server berjalan di http://localhost:${PORT}`)
+})
