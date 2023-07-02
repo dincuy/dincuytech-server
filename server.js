@@ -20,7 +20,7 @@ const timer = updateDataProduct(3600000);
 app.get("/", (req, res) => {
   // const waktu = updateDataProduct()
 
-  res.sendFile("index");
+  res.render("index");
 });
 
 app.use("/checkout", require("./routes/checkout"));
