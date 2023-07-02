@@ -13,7 +13,7 @@ const { updateDataProduct } = require("../../controllers/productController");
 app.use(cors(corsOptions));
 
 app.set("view engine", "ejs")
-app.set('views', path.join(__dirname, '..', '..', 'views'));
+app.set('views', path.join(__dirname, '..', '..'));
 
 // timer dalam milidetik
 // 24 jam
@@ -22,8 +22,8 @@ const timer = updateDataProduct(3600000)
 app.get("/", (req, res) => {
   // const waktu = updateDataProduct()
   
-  // res.render('index', {timer: timer})
-  res.json({name: path.join(__dirname, "..", "..")})
+  res.render('index', {timer: timer})
+  // res.json({name: path.join(__dirname, "..", "..")})
 });
 
 app.use("/checkout", require("../../routes/checkout"));
