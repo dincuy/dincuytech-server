@@ -29,10 +29,15 @@ app.get("/update", (req, res) => {
   for (let i in products) {
     scrapFromUrl(sourceUrls, products[i]).then(async (data) => {
       // const newData = data.slice(1, 10)
-      await setDoc(doc(db, "products", products[i]), {
-        data,
-        updatePada: serverTimestamp(),
-      });
+      try {
+        await setDoc(doc(db, "products", products[i]), {
+          data,
+          updatePada: serverTimestamp(),
+        });
+      } catch (error) {
+        res.json({ error: error.message });
+        return;
+      }
     });
   }
   res.json({ text: "update sukses" });
