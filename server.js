@@ -38,7 +38,7 @@ app.get("/update", (req, res) => {
         updatePada: serverTimestamp(),
       });
     });
-  // }
+  }
   res.json({ text: "update sukses" });
 });
 
