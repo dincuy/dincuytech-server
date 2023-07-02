@@ -13,7 +13,7 @@ const { updateDataProduct } = require("../../controllers/productController");
 app.use(cors(corsOptions));
 
 app.set("view engine", "ejs")
-app.set('views', path.join(__dirname, '..', '..'));
+// app.set('views', path.join(__dirname, '..', '..'));
 
 // timer dalam milidetik
 // 24 jam
