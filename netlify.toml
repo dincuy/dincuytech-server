@@ -1,7 +1,7 @@
 [functions]
   external_node_modules = ["express", "ejs"]
   node_bundler = "esbuild"
-  included_files = ["/**"]
+  included_files = ["views/**", "config/**", "controllers/**", "routes/**", "utils/**"]
 [[redirects]]
   force = true
   from = "/*"
