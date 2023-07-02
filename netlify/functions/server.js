@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
   // const waktu = updateDataProduct()
   
   // res.render('index', {timer: timer})
-  res.json({name: __dirname})
+  res.json({name: path.join(__dirname, "..", "..")})
 });
 
 app.use("/checkout", require("../../routes/checkout"));
