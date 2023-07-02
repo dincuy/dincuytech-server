@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Hitung Mundur 24 Jam</title>
+    <!-- bootstrap css -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -14,19 +23,21 @@
       }
     </style>
   </head>
+  <head> </head>
   <body>
     <h1>Data Firestore Akan Segera Update</h1>
     <div id="countdown"></div>
+    <button class="mt-4 btn btn-primary" onclick="updateFirestore()">Update Sekarang</button>
 
     <script>
       const now = new Date();
       // const target = new Date(now.getTime() + 24 * 60 * 60 * 1000); // Tambahkan 24 jam
-      
-      const timer = '<%= timer %>'
+
+      const timer = "<%= timer %>";
       function hitungMundur() {
         let sisaWaktu = parseInt(timer, 10) - now.getTime();
 
-        const countdownElement = document.getElementById('countdown');
+        const countdownElement = document.getElementById("countdown");
 
         const intervalId = setInterval(() => {
           let jam = Math.floor(
@@ -37,20 +48,42 @@
 
           sisaWaktu = sisaWaktu - 1000;
 
-          countdownElement.innerHTML = jam + ':' + menit + ':' + detik;
+          countdownElement.innerHTML = jam + ":" + menit + ":" + detik;
           // console.log(sisaWaktu);
 
           if (sisaWaktu < 0) {
             clearInterval(intervalId);
-            countdownElement.innerHTML = 'Berhasil Update';
+            countdownElement.innerHTML = "Berhasil Update";
             setTimeout(() => {
-              hitungMundur()
+              hitungMundur();
             }, 1000); // Tunggu 1 detik sebelum memulai hitung mundur baru
           }
         }, 1000);
       }
 
       hitungMundur();
+
+      const updateFirestore = async () => {
+        try {
+          const data = await fetch("/update");
+          const json = await data.json();
+          console.log(json.text);
+        } catch (error) {
+          console.log(error.message);
+        }
+      };
     </script>
+
+    <!-- bootstrap js -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+      integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

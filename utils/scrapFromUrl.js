@@ -32,7 +32,7 @@ const scrapFromUrl = async (sourceUrls, product) => {
             .find("td:nth-child(2) b")
             .attr("data-title")
             .replace(/\n/g, " ")
-            .trim() || "tidak ada";
+            .trim() || "tidak ada deskripsi";
           const harga = $(element).find("td:nth-child(3)").text().trim();
           const order = $(element).find("td:nth-child(4)").text().trim();
 
