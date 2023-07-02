@@ -35,7 +35,7 @@ app.get("/update", (req, res) => {
           updatePada: serverTimestamp(),
         });
       } catch (error) {
-        res.json({ error: error.message });
+        res.json({ error: error.message, data: products[i] });
         return;
       }
     });
