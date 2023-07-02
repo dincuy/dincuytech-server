@@ -1,5 +1,7 @@
 require("dotenv").config();
 const express = require("express");
+const ejs = require('ejs');
+const path = require('path')
 const app = express();
 const serverless = require("serverless-http");
 const cors = require("cors");
@@ -12,6 +14,7 @@ const { updateDataProduct } = require("../../controllers/productController");
 app.use(cors(corsOptions));
 
 app.set("view engine", "ejs")
+app.set('views', path.join(__dirname, '..', '..'));
 
 // timer dalam milidetik
 // 24 jam
