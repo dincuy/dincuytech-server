@@ -1,26 +1,25 @@
 require("dotenv").config();
 const express = require("express");
-const ejs = require('ejs');
 const app = express();
 const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
 const { updateDataProduct } = require("./controllers/productController");
 
-const PORT = 3500
+// const PORT = 3500;
 
 app.use(cors(corsOptions));
 // app.use(express.static(path.join(__dirname, 'public')))
 
-app.set("view engine", "ejs")
+app.set("view engine", "ejs");
 
 // timer dalam milidetik
 // 24 jam
-const timer = updateDataProduct(3600000)
+const timer = updateDataProduct(3600000);
 
 app.get("/", (req, res) => {
   // const waktu = updateDataProduct()
-  
-  res.render('index', {timer: timer})
+
+  res.render("index", { timer: timer });
 });
 
 app.use("/checkout", require("./routes/checkout"));
@@ -30,6 +29,8 @@ app.all("*", (req, res) => {
   res.json({ message: "Url not found cuyy" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Sukses server berjalan di http://localhost:${PORT}`)
-})
+// app.listen(PORT, () => {
+//   console.log(`Sukses server berjalan di http://localhost:${PORT}`);
+// });
+
+module.exports = { newApp: app };
