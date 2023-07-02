@@ -67,7 +67,7 @@
         try {
           const data = await fetch("/update");
           const json = await data.json();
-          console.log(json.text);
+          console.log(json.error || json.text);
         } catch (error) {
           console.log(error.message);
         }
