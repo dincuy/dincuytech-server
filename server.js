@@ -27,18 +27,22 @@ app.get("/", (req, res) => {
   res.render("index", { timer: timer });
 });
 
+// const fetchUpdate = async () => {
+//   const products = ["pulsa", "paket-internet", "voucher-internet"];
+//   for (let i in products) {
+//     scrapFromUrl(sourceUrls, products[i]).then(async (data) => {
+//       // const newData = data.slice(1, 10)
+//       await setDoc(doc(db, "products", products[i]), {
+//         data,
+//         updatePada: serverTimestamp(),
+//       });
+//     });
+//   }
+// }
+
 // update firestore
 app.get("/update", (req, res) => {
-  const products = ["pulsa", "paket-internet", "voucher-internet"];
-  for (let i in products) {
-    scrapFromUrl(sourceUrls, products[i]).then(async (data) => {
-      // const newData = data.slice(1, 10)
-      await setDoc(doc(db, "products", products[i]), {
-        data,
-        updatePada: serverTimestamp(),
-      });
-    });
-  }
+  
   res.json({ text: "update sukses" });
 });
 
@@ -52,5 +56,3 @@ app.all("*", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Sukses server berjalan di http://localhost:${PORT}`);
 });
-
-module.exports = { timer };
