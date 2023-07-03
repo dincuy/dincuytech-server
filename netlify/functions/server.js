@@ -23,10 +23,11 @@ app.get("/", (req, res) => {
   res.render("index", { timer: timer });
 });
 
-// update firestore
-app.get("/update", (req, res) => {
+const fetchUpdate = () => {
+  const dataUpdate = [];
   const products = ["pulsa", "paket-internet", "voucher-internet"];
   for (let i in products) {
+    const newDataUpdate = [];
     scrapFromUrl(sourceUrls, products[i]).then(async (data) => {
       // const newData = data.slice(1, 10)
       try {
@@ -34,13 +35,22 @@ app.get("/update", (req, res) => {
           data,
           updatePada: serverTimestamp(),
         });
+        console.log(`update data product ${products[i]} suksess`);
+        newDataUpdate.push({ [products[i]]: `update sukses` });
       } catch (error) {
-        res.json({ error: error.message, data: products[i] });
-        return;
+        console.log(error.message);
+        newDataUpdate.push({ [products[i]]: `update gagal` });
       }
     });
   }
-  res.json({ text: "update sukses" });
+
+  return dataUpdate;
+};
+
+// update firestore
+app.get("/update", (req, res) => {
+  const data = fetchUpdate();
+  res.json({ data: data });
 });
 
 app.use("/checkout", require("../../routes/checkout"));

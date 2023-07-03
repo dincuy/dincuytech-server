@@ -27,13 +27,15 @@
   <body>
     <h1>Data Firestore Akan Segera Update</h1>
     <div id="countdown"></div>
-    <button class="mt-4 btn btn-primary" onclick="updateFirestore()">Update Sekarang</button>
+    <button class="mt-4 btn btn-primary" onclick="updateFirestore()">
+      Update Sekarang
+    </button>
 
     <script>
       const now = new Date();
       // const target = new Date(now.getTime() + 24 * 60 * 60 * 1000); // Tambahkan 24 jam
 
-      const timer = "<%= timer %>";
+      const timer = 620000;
       function hitungMundur() {
         let sisaWaktu = parseInt(timer, 10) - now.getTime();
 
@@ -63,14 +65,17 @@
 
       hitungMundur();
 
-      const updateFirestore = async () => {
-        try {
-          const data = await fetch("/update");
-          const json = data.json();
-          console.log(json);
-        } catch (error) {
-          console.log(error.message);
-        }
+      const updateFirestore = () => {
+        fetch("/update")
+          .then((data) => {
+            return data.json();
+          })
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((erro) => {
+            console.log(error.message);
+          });
       };
     </script>
 

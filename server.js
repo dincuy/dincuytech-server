@@ -19,30 +19,36 @@ app.set("view engine", "ejs");
 
 // timer dalam milidetik
 // 24 jam
-const timer = updateDataProduct(3600000);
+// const timer = updateDataProduct(3600000);
+
+const fetchUpdate = () => {
+  const products = ["pulsa", "paket-internet", "voucher-internet"];
+  for (let i in products) {
+    scrapFromUrl(sourceUrls, products[i]).then(async (data) => {
+      // const newData = data.slice(1, 10)
+      try {
+        await setDoc(doc(db, "products", products[i]), {
+          data,
+          updatePada: serverTimestamp(),
+        });
+        console.log(`update data product ${products[i]} suksess`);
+      } catch (error) {
+        console.log(error.message);
+      }
+    });
+  }
+};
+
+// fetchUpdate()
 
 app.get("/", (req, res) => {
   // const waktu = updateDataProduct()
-
-  res.render("index", { timer: timer });
+  res.render("index");
 });
-
-// const fetchUpdate = async () => {
-//   const products = ["pulsa", "paket-internet", "voucher-internet"];
-//   for (let i in products) {
-//     scrapFromUrl(sourceUrls, products[i]).then(async (data) => {
-//       // const newData = data.slice(1, 10)
-//       await setDoc(doc(db, "products", products[i]), {
-//         data,
-//         updatePada: serverTimestamp(),
-//       });
-//     });
-//   }
-// }
 
 // update firestore
 app.get("/update", (req, res) => {
-  
+  fetchUpdate();
   res.json({ text: "update sukses" });
 });
 
