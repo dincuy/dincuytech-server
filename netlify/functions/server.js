@@ -24,12 +24,11 @@ app.get("/", (req, res) => {
 });
 
 const fetchUpdate = () => {
-  const dataUpdate = [];
+  let pesanUpdate = ''
   const products = ["pulsa", "paket-internet", "voucher-internet"];
   for (let i in products) {
-    const newDataUpdate = [];
     scrapFromUrl(sourceUrls, products[i]).then(async (data) => {
-      // const newData = data.slice(1, 10)
+      const newDataUpdate = [];
       try {
         await setDoc(doc(db, "products", products[i]), {
           data,
@@ -37,14 +36,16 @@ const fetchUpdate = () => {
         });
         console.log(`update data product ${products[i]} suksess`);
         newDataUpdate.push({ [products[i]]: `update sukses` });
+
+        if (products[i] === products[products.length -1]) {
+          return "Data sukses di update"
+        }
       } catch (error) {
         console.log(error.message);
         newDataUpdate.push({ [products[i]]: `update gagal` });
       }
-    });
+    }).then((data) => pesanUpdate = data)
   }
-
-  return dataUpdate;
 };
 
 // update firestore
@@ -60,6 +61,4 @@ app.all("*", (req, res) => {
   res.json({ message: "Url not found cuyy" });
 });
 
-const handler = serverless(app);
-
-module.exports = { handler };
+module.exports.handler = serverless(app)
