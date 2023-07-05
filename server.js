@@ -34,6 +34,7 @@ app.all("*", (req, res) => {
   res.json({ message: "Url not found cuyy" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Sukses server berjalan di http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server berjalan di http://0.0.0.0:${port}`);
 });
+
