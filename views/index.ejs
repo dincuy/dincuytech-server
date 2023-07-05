@@ -27,7 +27,7 @@
   <body>
     <h1>Data Firestore Akan Segera Update</h1>
     <div id="countdown"></div>
-    <button class="mt-4 btn btn-primary" onclick="updateFirestore()">
+    <button id="btn-update" class="mt-4 btn btn-primary" onclick="updateFirestore()">
       Update Sekarang
     </button>
 
@@ -35,7 +35,7 @@
       const now = new Date();
       // const target = new Date(now.getTime() + 24 * 60 * 60 * 1000); // Tambahkan 24 jam
 
-      const timer = 620000;
+      const timer = `<%= timer %>`;
       function hitungMundur() {
         let sisaWaktu = parseInt(timer, 10) - now.getTime();
 
@@ -71,6 +71,12 @@
             return data.json();
           })
           .then((data) => {
+            const btnUpdate = document.getElementById("btn-update")
+            btnUpdate.innerHTML = data.message
+
+            setTimeout(() => {
+              btnUpdate.innerHTML = "Update Sekarang"
+            }, 4000)
             console.log(data);
           })
           .catch((erro) => {

@@ -38,4 +38,30 @@ const updateDataProduct = (timer) => {
   return waktu;
 };
 
-module.exports = { updateDataProduct };
+const fetchUpdate = () => {
+  const products = ["pulsa", "paket-internet", "voucher-internet"];
+  const updateFirestoreStatus = []
+  for (let i in products) {
+    scrapFromUrl(sourceUrls, products[i]).then(async (data) => {
+      // const newData = data.slice(1, 10)
+      try {
+        await setDoc(doc(db, "products", products[i]), {
+          data,
+          updatePada: serverTimestamp(),
+        });
+
+        updateFirestoreStatus.push(`update data product ${products[i]} suksess`)
+        console.log(`update data product ${products[i]} suksess`);
+      } catch (error) {
+        console.log(error.message);
+      }
+    });
+
+    if (products[i] === products[products.length - 1]) {
+      console.log("update status ", updateFirestoreStatus)
+      return updateFirestoreStatus
+    }
+  }
+};
+
+module.exports = { updateDataProduct, fetchUpdate };

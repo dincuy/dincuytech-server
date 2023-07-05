@@ -4,13 +4,9 @@ const app = express();
 const path = require("path");
 const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
-const { updateDataProduct } = require("./controllers/productController");
-const scrapFromUrl = require("./utils/scrapFromUrl");
-const sourceUrls = require("./sourceUrls");
-const { setDoc, doc, serverTimestamp } = require("firebase/firestore");
-const { db } = require("./config/firebase");
+const { updateDataProduct, fetchUpdate } = require("./controllers/productController");
 
-const PORT = 3500;
+const PORT = process.env.PORT || 3500;
 
 app.use(cors(corsOptions));
 app.use(express.static(path.join(__dirname, "public")));
@@ -19,37 +15,16 @@ app.set("view engine", "ejs");
 
 // timer dalam milidetik
 // 24 jam
-// const timer = updateDataProduct(3600000);
-
-const fetchUpdate = () => {
-  const products = ["pulsa", "paket-internet", "voucher-internet"];
-  for (let i in products) {
-    scrapFromUrl(sourceUrls, products[i]).then(async (data) => {
-      // const newData = data.slice(1, 10)
-      try {
-        await setDoc(doc(db, "products", products[i]), {
-          data,
-          updatePada: serverTimestamp(),
-        });
-        console.log(`update data product ${products[i]} suksess`);
-      } catch (error) {
-        console.log(error.message);
-      }
-    });
-  }
-};
-
-// fetchUpdate()
+const timer = updateDataProduct(120000);
 
 app.get("/", (req, res) => {
-  // const waktu = updateDataProduct()
-  res.render("index");
+  res.render("index", { timer: timer });
 });
 
 // update firestore
 app.get("/update", (req, res) => {
-  fetchUpdate();
-  res.json({ text: "update sukses" });
+  fetchUpdate()
+  res.json({ message: "Suksess Update" })
 });
 
 app.use("/checkout", require("./routes/checkout"));

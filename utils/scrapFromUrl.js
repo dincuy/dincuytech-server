@@ -54,6 +54,7 @@ const scrapFromUrl = async (sourceUrls, product) => {
     }
   }
 
+  console.log("data", data.length)
   return data;
 };
 
