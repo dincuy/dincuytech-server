@@ -1,21 +1,12 @@
-// Import the functions you need from the SDKs you need
-const { initializeApp } = require("firebase/app");
-const { getFirestore } = require("firebase/firestore");
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+const { initializeApp, cert } = require('firebase-admin/app');
+const { getFirestore } = require('firebase-admin/firestore');
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: "dincuytech.firebaseapp.com",
-  projectId: "dincuytech",
-  storageBucket: "dincuytech.appspot.com",
-  messagingSenderId: "637097204346",
-  appId: "1:637097204346:web:d83f748f34bd838d38f9c3",
-};
+const serviceAccount = require('./serviceAccountKey.json');
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+initializeApp({
+  credential: cert(serviceAccount)
+});
 
-module.exports = { app, db };
+const db = getFirestore();
+
+module.exports = { db }

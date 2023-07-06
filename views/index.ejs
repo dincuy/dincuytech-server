@@ -27,63 +27,9 @@
   <body>
     <h1>Data Firestore Akan Segera Update</h1>
     <div id="countdown"></div>
-    <button id="btn-update" class="mt-4 btn btn-primary" onclick="updateFirestore()">
+    <button id="btn-update" class="mt-4 btn btn-primary">
       Update Sekarang
     </button>
-
-    <script>
-      const now = new Date();
-      // const target = new Date(now.getTime() + 24 * 60 * 60 * 1000); // Tambahkan 24 jam
-
-      const timer = `<%= timer %>`;
-      function hitungMundur() {
-        let sisaWaktu = parseInt(timer, 10) - now.getTime();
-
-        const countdownElement = document.getElementById("countdown");
-
-        const intervalId = setInterval(() => {
-          let jam = Math.floor(
-            (sisaWaktu % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-          );
-          let menit = Math.floor((sisaWaktu % (1000 * 60 * 60)) / (1000 * 60));
-          let detik = Math.floor((sisaWaktu % (1000 * 60)) / 1000);
-
-          sisaWaktu = sisaWaktu - 1000;
-
-          countdownElement.innerHTML = jam + ":" + menit + ":" + detik;
-          // console.log(sisaWaktu);
-
-          if (sisaWaktu < 0) {
-            clearInterval(intervalId);
-            countdownElement.innerHTML = "Berhasil Update";
-            setTimeout(() => {
-              hitungMundur();
-            }, 1000); // Tunggu 1 detik sebelum memulai hitung mundur baru
-          }
-        }, 1000);
-      }
-
-      hitungMundur();
-
-      const updateFirestore = () => {
-        fetch("/update")
-          .then((data) => {
-            return data.json();
-          })
-          .then((data) => {
-            const btnUpdate = document.getElementById("btn-update")
-            btnUpdate.innerHTML = data.message
-
-            setTimeout(() => {
-              btnUpdate.innerHTML = "Update Sekarang"
-            }, 4000)
-            console.log(data);
-          })
-          .catch((erro) => {
-            console.log(error.message);
-          });
-      };
-    </script>
 
     <!-- bootstrap js -->
     <script
