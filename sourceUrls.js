@@ -111,19 +111,10 @@ const pulsaUrls = [
 //   "voucher-internet": voucherInternetUrls
 // }
 
-const sourceUrls = [
-  {
-    product: "pulsa",
-    items: pulsaUrls
-  },
-  {
-    product: "paket-internet",
-    items: paketInternetUrls
-  },
-  {
-    product: "voucher-internet",
-    items: voucherInternetUrls
-  },
-]
+const sourceUrls = {
+  pulsa: pulsaUrls,
+  'paket-internet': paketInternetUrls,
+  'voucher-internet': voucherInternetUrls
+}
 
 module.exports = sourceUrls;
