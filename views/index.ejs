@@ -58,7 +58,9 @@
         textBtn[product].innerHTML = 'Loading...'
         textBtn[product].classList.remove('btn-primary')
         textBtn[product].classList.add('btn-light')
+        console.log('loading')
         await fetch(`/scrape-and-update/${product}`)
+        console.log('fetch berjalan')
         textBtn[product].classList.remove('btn-light')
         textBtn[product].classList.add('btn-success')
         textBtn[product].innerHTML = `Update data ${product} suksesss`
