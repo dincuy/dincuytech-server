@@ -4,16 +4,13 @@ const app = express();
 const path = require("path");
 const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
-const sourceUrls = require("./sourceUrls");
-const { default: axios } = require("axios");
-const { FieldValue } = require('firebase-admin/firestore');
-const { db } = require("./config/firebase");
-const cheerio = require("cheerio");
+const { scrapeDataProduct } = require("./controllers/productController");
 
 const PORT = process.env.PORT || 3500;
 
 app.use(cors(corsOptions));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.json());
 
 app.set("view engine", "ejs");
 
@@ -21,74 +18,16 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.use("/user", require("./routes/userRoutes"));
+
 // Endpoint untuk melakukan scrapping dan mengupdate data di Firestore
-app.get('/scrape-and-update/:product', async (req, res) => {
-  const product = req.params.product
-  
-  try {
-    const sources = sourceUrls[product]
-    if (!sources) {
-      res.json({message: 'errrorroror'})
-      return
-    }
-    
-    const data = []
-
-    for (let i in sources) {
-      const provider = sources[i].provider
-      const urls = sources[i].urls
-
-      const scrapedData = []
-
-      for (let i in urls) {
-        const res = await axios(urls[i]);
-        const html = await res.data;
-
-        const $ = cheerio.load(html);
-        const title = $(".payment_title").text();
-
-        $("table.hidden-xs tbody tr").each((index, element) => {
-          const kode = $(element).find("td:nth-child(1)").text().trim();
-          const produk = $(element).find("td:nth-child(2)").text().trim();
-          const desc = $(element)
-            .find("td:nth-child(2) b")
-            .attr("data-title")
-            .replace(/\n/g, " ")
-            .trim() || "tidak ada deskripsi";
-          const harga = $(element).find("td:nth-child(3)").text().trim();
-          const order = $(element).find("td:nth-child(4)").text().trim();
-
-          scrapedData.push({
-            kode,
-            provider,
-            jenisPaket: title.split(" ").slice(1).join(" "),
-            produk,
-            desc,
-            harga,
-            order,
-          });
-        });
-      }
-
-      data.push(...scrapedData)
-    }
-
-    const docRef = db.collection("products").doc(product);
-    await docRef.set({ data, updatePada: FieldValue.serverTimestamp() });
-
-    res.json({message: `Scraping and updating data ${product} complete!`});
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('An error occurred');
-  }
-});
+app.get("/scrape-and-update/:product", scrapeDataProduct);
 
 app.all("*", (req, res) => {
   res.status(404);
   res.json({ message: "Url not found cuyy" });
 });
 
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server berjalan di http://0.0.0.0:${PORT}`);
 });
-
