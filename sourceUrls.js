@@ -24,6 +24,8 @@ const paketInternetUrls = [
       "https://isipulsa.web.id/harga/paket-internet/telkomsel-kuota-mini",
       "https://isipulsa.web.id/harga/paket-internet/telkomsel-kuota-lokal-jabotabek-dan-jawa-barat",
       "https://isipulsa.web.id/harga/paket-internet/telkomsel-kuota-malam",
+      "https://isipulsa.web.id/harga/paket-internet/telkomsel-kuota-sesuai-zona",
+      "https://isipulsa.web.id/harga/paket-internet/telkomsel-kuota-m-kios",
     ],
   },
   {
