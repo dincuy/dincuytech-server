@@ -2,7 +2,7 @@ const cheerio = require("cheerio");
 
 /**
  *
- * @param {Object} source
+ * @param {Object} sources
  * @param {String} product
  */
 const scrapFromUrl = async (sourceUrls, product) => {
