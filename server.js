@@ -7,9 +7,8 @@ const path = require("path");
 const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
 const { scrapeDataProduct } = require("./controllers/productController");
-const PaketInternet = require("./models/paketInternet.model");
-const scrapFromUrl = require("./utils/scrapFromUrl");
-const sourceUrls = require("./sourceUrls");
+
+const konterRoute = require("./routes/konterRoute");
 
 const PORT = process.env.PORT || 3500;
 
@@ -28,28 +27,8 @@ app.get("/", (req, res) => {
 // Endpoint untuk melakukan scrapping dan mengupdate data di Firestore
 app.get("/scrape-and-update/:product", scrapeDataProduct);
 
-// update data paket-internet
-app.get("/product/paket-internet/:id", async (req, res) => {
-  try {
-    if (req.params.id === "update-all") {
-      const newData = await scrapFromUrl(sourceUrls, "paket-internet");
-
-      const jumlahDokumen = await PaketInternet.countDocuments({});
-      if (jumlahDokumen > 0) {
-        await PaketInternet.deleteMany();
-        console.log('delete dulu boss')
-      }
-
-      const result = await PaketInternet.insertMany(newData);
-      // console.log(newData);
-      res.status(200).json(result)
-    } else {
-      res.status(404).json({ message: "gagal" });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+// rute konter
+app.use("/konter", konterRoute);
 
 app.all("*", (req, res) => {
   res.status(404);
