@@ -17,28 +17,7 @@ router.get("/paket-internet", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-// update data
-router.get("/paket-internet/:id", async (req, res) => {
-  try {
-    if (req.params.id === "update-all") {
-      const newData = await scrapFromUrl(sourceUrls, "paket-internet");
-
-      const jumlahDokumen = await PaketInternet.countDocuments({});
-      if (jumlahDokumen > 0) {
-        await PaketInternet.deleteMany();
-        console.log("delete dulu boss");
-      }
-
-      const result = await PaketInternet.insertMany(newData);
-      // console.log(newData);
-      res.status(200).json(result);
-    } else {
-      res.status(404).json({ message: "gagal" });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+// get paket internet by jenis paket
 
 // VOUCHER INTERNET
 // get tersedia
@@ -46,28 +25,6 @@ router.get("/voucher-internet", async (req, res) => {
   try {
     const result = await VoucherInternet.find({ order: "ORDER" });
     res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-// update data
-router.get("/voucher-internet/:id", async (req, res) => {
-  try {
-    if (req.params.id === "update-all") {
-      const newData = await scrapFromUrl(sourceUrls, "voucher-internet");
-
-      const jumlahDokumen = await VoucherInternet.countDocuments({});
-      if (jumlahDokumen > 0) {
-        await VoucherInternet.deleteMany();
-        console.log("delete dulu boss");
-      }
-
-      const result = await VoucherInternet.insertMany(newData);
-      // console.log(newData);
-      res.status(200).json(result);
-    } else {
-      res.status(404).json({ message: "gagal" });
-    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -83,24 +40,28 @@ router.get("/pulsa", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-// update data
-router.get("/pulsa/:id", async (req, res) => {
+
+// UPDATE DATA PRODUK
+router.get("/update-data/:produk", async (req, res) => {
+  const models = {
+    "paket-internet": PaketInternet,
+    "voucher-internet": VoucherInternet,
+    pulsa: Pulsa,
+  };
   try {
-    if (req.params.id === "update-all") {
-      const newData = await scrapFromUrl(sourceUrls, "pulsa");
+    const produk = req.params.produk;
 
-      const jumlahDokumen = await Pulsa.countDocuments({});
-      if (jumlahDokumen > 0) {
-        await Pulsa.deleteMany();
-        console.log("delete dulu boss");
-      }
+    const newData = await scrapFromUrl(sourceUrls, produk);
 
-      const result = await Pulsa.insertMany(newData);
-      // console.log(newData);
-      res.status(200).json(result);
-    } else {
-      res.status(404).json({ message: "gagal" });
+    const jumlahDokumen = await models[produk].countDocuments({});
+    if (jumlahDokumen > 0) {
+      await models[produk].deleteMany();
+      console.log("delete dulu boss");
     }
+
+    const result = await models[produk].insertMany(newData);
+    // console.log(newData);
+    res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
