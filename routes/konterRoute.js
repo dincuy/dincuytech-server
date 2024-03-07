@@ -65,6 +65,22 @@ router.get("/voucher-internet", async (req, res) => {
 // get tersedia
 router.get("/pulsa", async (req, res) => {
   try {
+    // url => /pulsa?field=jenisPaket
+    // mendapatkan nilai jenisPaket [] --unik
+    const field = req.query.field;
+    if (field === "jenisPaket") {
+      const result = await Pulsa.distinct("jenisPaket").exec();
+      return res.status(200).json(result);
+    }
+
+    // url => /pulsa?jenisPaket=${encodeURIComponent(jenisPaketValue)}
+    // filter jenisPaket
+    const filterPaket = req.query.filter;
+    if (filterPaket) {
+      const result = await Pulsa.find({ jenisPaket: filterPaket, order: "ORDER" }).exec();
+      return res.status(200).json(result);
+    }
+
     const result = await Pulsa.find({ order: "ORDER" });
     res.status(200).json(result);
   } catch (error) {

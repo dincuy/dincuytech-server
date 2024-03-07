@@ -39,6 +39,10 @@ const voucherInternetSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    hargaJual: {
+      type: String,
+      required: true,
+    },
     order: {
       type: String,
       required: true,

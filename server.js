@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 app.get("/scrape-and-update/:product", scrapeDataProduct);
 
 // rute konter
-app.use("/konter", konterRoute);
+app.use("/api/konter", konterRoute);
 
 app.all("*", (req, res) => {
   res.status(404);
