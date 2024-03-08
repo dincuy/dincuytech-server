@@ -24,9 +24,6 @@ app.get("/", (req, res) => {
 
 // app.use("/user", require("./routes/userRoutes"));
 
-// Endpoint untuk melakukan scrapping dan mengupdate data di Firestore
-app.get("/scrape-and-update/:product", scrapeDataProduct);
-
 // rute konter
 app.use("/api/konter", konterRoute);
 

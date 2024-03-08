@@ -11,23 +11,18 @@ const Pulsa = require("../models/pulsaModel");
 // get tersedia
 router.get("/paket-internet", async (req, res) => {
   try {
-    // url => /paket-internet?field=jenisPaket
-    // mendapatkan nilai jenisPaket [] --unik
-    const field = req.query.field;
-    if (field === "jenisPaket") {
-      const result = await PaketInternet.distinct("jenisPaket").exec();
-      return res.status(200).json(result);
-    }
+    const result = [
+      {
+        data: [],
+        options: [],
+      },
+    ];
 
-    // url => /paket-internet?jenisPaket=${encodeURIComponent(jenisPaketValue)}
-    // filter jenisPaket
-    const filterPaket = req.query.filter;
-    if (filterPaket) {
-      const result = await PaketInternet.find({ jenisPaket: filterPaket, order: "ORDER"}).exec();
-      return res.status(200).json(result);
-    }
+    result[0].data = await PaketInternet.find({ order: "ORDER" });
+    result[0].options = await PaketInternet.distinct("jenisPaket", {
+      order: "ORDER",
+    }).exec();
 
-    const result = await PaketInternet.find({ order: "ORDER" });
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -38,23 +33,17 @@ router.get("/paket-internet", async (req, res) => {
 // get tersedia
 router.get("/voucher-internet", async (req, res) => {
   try {
-    // url => /voucher-internet?field=jenisPaket
-    // mendapatkan nilai jenisPaket [] --unik
-    const field = req.query.field;
-    if (field === "jenisPaket") {
-      const result = await VoucherInternet.distinct("jenisPaket").exec();
-      return res.status(200).json(result);
-    }
+    const result = [
+      {
+        data: [],
+        options: [],
+      },
+    ];
 
-    // url => /voucher-internet?jenisPaket=${encodeURIComponent(jenisPaketValue)}
-    // filter jenisPaket
-    const filterPaket = req.query.filter;
-    if (filterPaket) {
-      const result = await VoucherInternet.find({ jenisPaket: filterPaket, order: "ORDER" }).exec();
-      return res.status(200).json(result);
-    }
-
-    const result = await VoucherInternet.find({ order: "ORDER" });
+    result[0].data = await VoucherInternet.find({ order: "ORDER" });
+    result[0].options = await VoucherInternet.distinct("jenisPaket", {
+      order: "ORDER",
+    }).exec();
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -65,23 +54,17 @@ router.get("/voucher-internet", async (req, res) => {
 // get tersedia
 router.get("/pulsa", async (req, res) => {
   try {
-    // url => /pulsa?field=jenisPaket
-    // mendapatkan nilai jenisPaket [] --unik
-    const field = req.query.field;
-    if (field === "jenisPaket") {
-      const result = await Pulsa.distinct("jenisPaket").exec();
-      return res.status(200).json(result);
-    }
+    const result = [
+      {
+        data: [],
+        options: [],
+      },
+    ];
 
-    // url => /pulsa?jenisPaket=${encodeURIComponent(jenisPaketValue)}
-    // filter jenisPaket
-    const filterPaket = req.query.filter;
-    if (filterPaket) {
-      const result = await Pulsa.find({ jenisPaket: filterPaket, order: "ORDER" }).exec();
-      return res.status(200).json(result);
-    }
-
-    const result = await Pulsa.find({ order: "ORDER" });
+    result[0].data = await Pulsa.find({ order: "ORDER" });
+    result[0].options = await Pulsa.distinct("jenisPaket", {
+      order: "ORDER",
+    }).exec();
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ message: error.message });
