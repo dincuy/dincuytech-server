@@ -9,6 +9,7 @@ const corsOptions = require("./config/corsOptions");
 const { scrapeDataProduct } = require("./controllers/productController");
 
 const konterRoute = require("./routes/konterRoute");
+const wifiRoute = require("./routes/wifiRoute");
 
 const PORT = process.env.PORT || 3500;
 
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 
 // rute konter
 app.use("/api/konter", konterRoute);
+app.use("/api/wifi", wifiRoute);
 
 app.all("*", (req, res) => {
   res.status(404);
