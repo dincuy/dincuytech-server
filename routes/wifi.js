@@ -1,5 +1,5 @@
 const express = require("express");
-const PelangganWifi = require("../models/pelangganWifiModel");
+const PelangganWifi = require("../models/wifi/pelangganWifi");
 const router = express.Router();
 
 // PELANGGAN WIFI

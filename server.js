@@ -6,10 +6,10 @@ const app = express();
 const path = require("path");
 const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
-const { scrapeDataProduct } = require("./controllers/productController");
+const { scrapeDataProduct } = require("./controllers/konter/product");
 
-const konterRoute = require("./routes/konterRoute");
-const wifiRoute = require("./routes/wifiRoute");
+const konterRoute = require("./routes/konter");
+const wifiRoute = require("./routes/wifi");
 
 const PORT = process.env.PORT || 3500;
 

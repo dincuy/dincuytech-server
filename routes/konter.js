@@ -3,9 +3,9 @@ const router = express.Router();
 
 const sourceUrls = require("../sourceUrls");
 const scrapFromUrl = require("../utils/scrapFromUrl");
-const PaketInternet = require("../models/paketInternetModel");
-const VoucherInternet = require("../models/voucherInternetModel");
-const Pulsa = require("../models/pulsaModel");
+const PaketInternet = require("../models/konter/paketInternet");
+const VoucherInternet = require("../models/konter/voucherInternet");
+const Pulsa = require("../models/konter/pulsa");
 
 // PAKET INTERNET
 // get tersedia
