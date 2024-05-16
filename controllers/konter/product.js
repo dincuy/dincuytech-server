@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const { default: axios } = require("axios");
 // const { db } = require("../config/firebase");
-const sourceUrls = require("../sourceUrls");
+const sourceUrls = require("../../sourceUrls");
 const cheerio = require("cheerio");
 // const { FieldValue } = require("firebase-admin/firestore");
 
