@@ -90,7 +90,6 @@ router.get("/update-data/:produk", async (req, res) => {
     }
 
     const result = await models[produk].insertMany(newData);
-    // console.log(newData);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ message: error.message });
