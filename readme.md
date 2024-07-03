@@ -5,25 +5,25 @@
 - GET => /api/konter/paket-internet
 - - return
 ```
-    [
-        {
-            data: [
-                {
-                    _id:..,
-                    kode:..,
-                    provider:..,
-                    jenisPaket:..,
-                    produk:..,
-                    desc:..,
-                    harga:..,
-                    hargaJual:..,
-                    order:..,
-                    dibuatPada:..
-                }
-            ],
-            options: ["...", "...", "...", ...]
-        }
-    ]
+[
+    {
+        data: [
+            {
+                _id:..,
+                kode:..,
+                provider:..,
+                jenisPaket:..,
+                produk:..,
+                desc:..,
+                harga:..,
+                hargaJual:..,
+                order:..,
+                dibuatPada:..
+            }
+        ],
+        options: ["...", "...", "...", ...]
+    }
+]
 ```
 - UPDATE DATA GET => /api/konter/update-data/paket-internet
 
@@ -31,25 +31,25 @@
 - GET => /api/konter/voucher-internet
 - - return
 ```
-    [
-        {
-            data: [
-                {
-                    _id:..,
-                    kode:..,
-                    provider:..,
-                    jenisPaket:..,
-                    produk:..,
-                    desc:..,
-                    harga:..,
-                    hargaJual:..,
-                    order:..,
-                    dibuatPada:..
-                }
-            ],
-            options: ["...", "...", "...", ...]
-        }
-    ]
+[
+    {
+        data: [
+            {
+                _id:..,
+                kode:..,
+                provider:..,
+                jenisPaket:..,
+                produk:..,
+                desc:..,
+                harga:..,
+                hargaJual:..,
+                order:..,
+                dibuatPada:..
+            }
+        ],
+        options: ["...", "...", "...", ...]
+    }
+]
 ```
 - UPDATE DATA GET => /api/konter/update-data/voucher-internet
 
@@ -57,25 +57,25 @@
 - GET => /api/konter/pulsa
 - - return
 ```
-    [
-        {
-            data: [
-                {
-                    _id:..,
-                    kode:..,
-                    provider:..,
-                    jenisPaket:..,
-                    produk:..,
-                    desc:..,
-                    harga:..,
-                    hargaJual:..,
-                    order:..,
-                    dibuatPada:..
-                }
-            ],
-            options: ["...", "...", "...", ...]
-        }
-    ]
+[
+    {
+        data: [
+            {
+                _id:..,
+                kode:..,
+                provider:..,
+                jenisPaket:..,
+                produk:..,
+                desc:..,
+                harga:..,
+                hargaJual:..,
+                order:..,
+                dibuatPada:..
+            }
+        ],
+        options: ["...", "...", "...", ...]
+    }
+]
 ```
 - Update Data GET => /api/konter/update-data/pulsa
 
