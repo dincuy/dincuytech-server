@@ -52,6 +52,7 @@
 3. **PULSA**
 - GET => /api/konter/pulsa
 - - return
+```
     [
         {
             data: [
@@ -71,12 +72,14 @@
             options: ["...", "...", "...", ...]
         }
     ]
+```
 - Update Data GET => /api/konter/update-data/pulsa
 
 ## WIFI
 1. **PELANGGAN WIFI**
 - GET => /api/wifi
 - - return
+```
 [
     {
         _id:...,
@@ -85,8 +88,11 @@
         dibuatPada:..,
     }
 ]
+```
 - Tambah Pelanggan POST => /api/wifi
+```
 {
     nama: "Contoh Nama",
     macAddress: "CO:NT:OH:MA:CA"
 }
+```
