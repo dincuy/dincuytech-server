@@ -4,6 +4,7 @@
 1. **PAKET INTERNET**
 - GET => /api/konter/paket-internet
 - - return
+```
     [
         {
             data: [
@@ -23,11 +24,13 @@
             options: ["...", "...", "...", ...]
         }
     ]
+```
 - UPDATE DATA GET => /api/konter/update-data/paket-internet
 
 2. **VOUCHER INTERNET**
 - GET => /api/konter/voucher-internet
 - - return
+```
     [
         {
             data: [
@@ -47,6 +50,7 @@
             options: ["...", "...", "...", ...]
         }
     ]
+```
 - UPDATE DATA GET => /api/konter/update-data/voucher-internet
 
 3. **PULSA**
