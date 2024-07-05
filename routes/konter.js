@@ -78,15 +78,10 @@ router.get("/update-data/:produk", async (req, res) => {
     "voucher-internet": VoucherInternet,
     pulsa: Pulsa,
   };
-  let tempatError = ""
-  let produknya = ""
   try {
-    tempatError ="sebelum req.params.produk"
     const produk = req.params.produk;
-    produknya = produk
 
     const newData = await scrapFromUrl(sourceUrls, produk);
-    tempatError = "scrapFromUrl"
 
     const jumlahDokumen = await models[produk].countDocuments({});
     tempatError = "jumlahDokumen"
@@ -98,7 +93,7 @@ router.get("/update-data/:produk", async (req, res) => {
     const result = await models[produk].insertMany(newData);
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({ message: error.message, tempatError, produknya });
+    res.status(500).json({ message: error.message });
   }
 });
 
