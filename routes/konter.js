@@ -80,6 +80,7 @@ router.get("/update-data/:produk", async (req, res) => {
   };
   let tempatError = ""
   try {
+    tempatError ="sebelum req.params.produk"
     const produk = req.params.produk;
 
     const newData = await scrapFromUrl(sourceUrls, produk);
