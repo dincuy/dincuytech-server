@@ -1,3 +1,4 @@
+const axios = require('axios');
 const cheerio = require("cheerio");
 const { konversiHarga, getTotalHargaPulsa } = require("./tools");
 
@@ -20,8 +21,8 @@ const scrapFromUrl = async (sourceUrls, product) => {
     for (let i in urls) {
       const newData = [];
       try {
-        const res = await fetch(urls[i]);
-        const html = await res.text();
+        const res = await axios.get(urls[i]);
+        const html = await res.data;
         const $ = cheerio.load(html);
 
         const title = $(".payment_title").text();
