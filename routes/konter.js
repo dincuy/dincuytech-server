@@ -79,9 +79,11 @@ router.get("/update-data/:produk", async (req, res) => {
     pulsa: Pulsa,
   };
   let tempatError = ""
+  let produknya = ""
   try {
     tempatError ="sebelum req.params.produk"
     const produk = req.params.produk;
+    produknya = produk
 
     const newData = await scrapFromUrl(sourceUrls, produk);
     tempatError = "scrapFromUrl"
@@ -96,7 +98,7 @@ router.get("/update-data/:produk", async (req, res) => {
     const result = await models[produk].insertMany(newData);
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({ message: error.message, tempatError });
+    res.status(500).json({ message: error.message, tempatError, produknya });
   }
 });
 
