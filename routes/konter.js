@@ -84,7 +84,6 @@ router.get("/update-data/:produk", async (req, res) => {
     const newData = await scrapFromUrl(sourceUrls, produk);
 
     const jumlahDokumen = await models[produk].countDocuments({});
-    tempatError = "jumlahDokumen"
     if (jumlahDokumen > 0) {
       await models[produk].deleteMany();
       console.log("delete dulu boss");

@@ -1,9 +1,16 @@
+/**
+ * keuntungan yang diinginkan, contoh profit = 2000
+ * @param {*} profit
+ */
 const konversiHarga = (nominal, profit) => {
-  const newTotalHarga = Math.ceil(
-    parseInt(nominal.replace(/[^\d]/g, ""), 10) + profit
-  );
+  const newTotalHarga = parseInt(nominal.replace(/[^\d]/g, ""), 10) + profit;
 
-  const bulatkan = Math.ceil(newTotalHarga / 1000) * 1000;
+  // Dapatkan ribuan dan ratusan
+  const ribuan = Math.floor(newTotalHarga / 1000) * 1000;
+  const ratusan = newTotalHarga % 1000;
+
+  // Bulatkan sesuai aturan yang diberikan
+  const bulatkan = ratusan >= 500 ? ribuan + 1000 : ribuan;
 
   return "Rp." + bulatkan.toLocaleString("id-ID");
 };
