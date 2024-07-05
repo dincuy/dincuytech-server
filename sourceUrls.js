@@ -63,6 +63,8 @@ const voucherInternetUrls = [
     urls: [
       "https://isipulsa.web.id/harga/voucher-internet/indosat-freedom-u",
       "https://isipulsa.web.id/harga/voucher-internet/indosat-old-freedom-324",
+      "https://isipulsa.web.id/harga/voucher-internet/indosat-freedom-mini-harian",
+      
     ],
   },
   {
