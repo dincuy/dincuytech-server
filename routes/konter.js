@@ -78,12 +78,15 @@ router.get("/update-data/:produk", async (req, res) => {
     "voucher-internet": VoucherInternet,
     pulsa: Pulsa,
   };
+  let tempatError = ""
   try {
     const produk = req.params.produk;
 
     const newData = await scrapFromUrl(sourceUrls, produk);
+    tempatError = "scrapFromUrl"
 
     const jumlahDokumen = await models[produk].countDocuments({});
+    tempatError = "jumlahDokumen"
     if (jumlahDokumen > 0) {
       await models[produk].deleteMany();
       console.log("delete dulu boss");
