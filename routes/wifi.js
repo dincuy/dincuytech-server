@@ -36,5 +36,38 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Mengedit pelanggan wifi berdasarkan ID
+router.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { nama, macAddress, dibuatPada } = req.body;
+
+  try {
+    const updatedPelangganWifi = await PelangganWifi.findByIdAndUpdate(
+      id,
+      { nama, macAddress },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedPelangganWifi) {
+      return res.status(404).json({ message: 'Pelanggan wifi not found' });
+    }
+
+    res.json(updatedPelangganWifi);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Menghapus pelanggan wifi
+router.delete('/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    await PelangganWifi.findByIdAndDelete(id);
+    res.status(200).json({ message: 'Data deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting data', error });
+  }
+});
+
 
 module.exports = router
