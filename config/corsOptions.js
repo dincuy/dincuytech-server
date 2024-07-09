@@ -1,4 +1,4 @@
-const allowedOrigins = ['https://dincuy.netlify.app', 'http://localhost:5173'];
+const allowedOrigins = ['https://dincuy.netlify.app', 'http://localhost:5173', 'https://wificuy.netlify.app'];
 
 const corsOptions = {
   origin: function (origin, callback) {
