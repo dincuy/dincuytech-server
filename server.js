@@ -10,7 +10,8 @@ const { scrapeDataProduct } = require("./controllers/konter/product");
 
 const konterRoute = require("./routes/konter");
 const wifiRoute = require("./routes/wifi");
-const produkRoute = require("./routes/produk")
+const produkRoute = require("./routes/produk");
+const pelangganRoute = require("./routes/pelanggan");
 
 const PORT = process.env.PORT || 3500;
 
@@ -30,7 +31,9 @@ app.get("/", (req, res) => {
 app.use("/api/konter", konterRoute);
 app.use("/api/wifi", wifiRoute);
 
-app.use("/api/warung/produk", produkRoute)
+app.use("/api/warung/produk", produkRoute);
+// pelanggan
+app.use("/api/pelanggan", pelangganRoute);
 
 app.all("*", (req, res) => {
   res.status(404);
