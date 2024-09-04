@@ -54,6 +54,6 @@ const paketInternetSchema = new mongoose.Schema(
   },
 );
 
-const PaketInternet = mongoose.model("PaketInternet", paketInternetSchema);
+const PaketInternet = mongoose.model("PaketInternet", paketInternetSchema, "paket-internet");
 
 module.exports = PaketInternet;

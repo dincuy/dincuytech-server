@@ -72,28 +72,28 @@ router.get("/pulsa", async (req, res) => {
 });
 
 // UPDATE DATA PRODUK
-router.get("/update-data/:produk", async (req, res) => {
-  const models = {
-    "paket-internet": PaketInternet,
-    "voucher-internet": VoucherInternet,
-    pulsa: Pulsa,
-  };
-  try {
-    const produk = req.params.produk;
+// router.get("/update-data/:produk", async (req, res) => {
+//   const models = {
+//     "paket-internet": PaketInternet,
+//     "voucher-internet": VoucherInternet,
+//     pulsa: Pulsa,
+//   };
+//   try {
+//     const produk = req.params.produk;
 
-    const newData = await scrapFromUrl(sourceUrls, produk);
+//     const newData = await scrapFromUrl(sourceUrls, produk);
 
-    const jumlahDokumen = await models[produk].countDocuments({});
-    if (jumlahDokumen > 0) {
-      await models[produk].deleteMany();
-      console.log("delete dulu boss");
-    }
+//     const jumlahDokumen = await models[produk].countDocuments({});
+//     if (jumlahDokumen > 0) {
+//       await models[produk].deleteMany();
+//       console.log("delete dulu boss");
+//     }
 
-    const result = await models[produk].insertMany(newData);
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+//     const result = await models[produk].insertMany(newData);
+//     res.status(200).json(result);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// });
 
 module.exports = router;
