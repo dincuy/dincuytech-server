@@ -1,9 +1,9 @@
 const asyncHandler = require("express-async-handler");
 const { default: axios } = require("axios");
-const { db } = require("../config/firebase");
-const sourceUrls = require("../sourceUrls");
+// const { db } = require("../config/firebase");
+const sourceUrls = require("../../sourceUrls");
 const cheerio = require("cheerio");
-const { FieldValue } = require("firebase-admin/firestore");
+// const { FieldValue } = require("firebase-admin/firestore");
 
 const scrapeDataProduct = asyncHandler(async (req, res) => {
   const product = req.params.product;
@@ -55,8 +55,8 @@ const scrapeDataProduct = asyncHandler(async (req, res) => {
     data.push(...scrapedData);
   }
 
-  const docRef = db.collection("products").doc(product);
-  await docRef.set({ data, updatePada: FieldValue.serverTimestamp() });
+  // const docRef = db.collection("products").doc(product);
+  // await docRef.set({ data, updatePada: FieldValue.serverTimestamp() });
 
   res.json({ message: `Scraping and updating data ${product} complete!` });
 });
