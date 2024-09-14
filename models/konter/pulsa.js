@@ -54,6 +54,6 @@ const pulsaSchema = new mongoose.Schema(
   },
 );
 
-const Pulsa = mongoose.model("Pulsa", pulsaSchema);
+const Pulsa = mongoose.model("Pulsa", pulsaSchema, "pulsa");
 
 module.exports = Pulsa;
