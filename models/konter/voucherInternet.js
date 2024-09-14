@@ -54,6 +54,6 @@ const voucherInternetSchema = new mongoose.Schema(
   },
 );
 
-const VoucherInternet = mongoose.model("VoucherInternet", voucherInternetSchema);
+const VoucherInternet = mongoose.model("VoucherInternet", voucherInternetSchema, "voucher-internet");
 
 module.exports = VoucherInternet;
